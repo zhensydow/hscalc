@@ -1,0 +1,1 @@
+runhaskell setup.hs build

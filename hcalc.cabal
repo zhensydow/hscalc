@@ -1,0 +1,11 @@
+Name:       HaskellStackCalculator
+Version:    0.0
+License:    GPL
+License-File: gpl-3.0.txt
+Author:     Luis Cabellos
+Synopsis:   Stack Calculator 
+Build-Depends: base -any
+
+Executable: hcalc
+Main-Is:    main.lhs
+Hs-Source-Dirs: src
