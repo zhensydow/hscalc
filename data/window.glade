@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
+<!--Generated with glade3 3.0.2 on Sat Sep 01 23:15:47 2007 by Luis@LIEBANA-->
+<glade-interface>
+  <widget class="GtkWindow" id="window1">
+    <child>
+      <widget class="GtkButton" id="button1">
+        <property name="visible">True</property>
+        <property name="label" translatable="yes">button</property>
+      </widget>
+    </child>
+  </widget>
+</glade-interface>

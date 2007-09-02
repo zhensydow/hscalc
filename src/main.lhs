@@ -15,5 +15,32 @@
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 \begin{code}
-main = putStrLn "Hola Mundo"
+module Main where
+\end{code}
+
+\begin{code}
+import Paths_hsCalc
+\end{code}
+
+\begin{code}
+import Graphics.UI.Gtk
+import Graphics.UI.Gtk.Glade
+\end{code}
+
+\begin{code}
+main = do
+    initGUI
+    
+    -- carga la especificacion
+    name <- getDataFileName "data/window.glade"
+    dialogXmlM <- xmlNew name
+    let dialogXml = case dialogXmlM of
+            (Just dialogXml) -> dialogXml
+            Nothing -> error "can't find glade file"
+    
+    -- pon en pantalla la ventana
+    window <- xmlGetWidget dialogXml castToWindow "window1"
+    onDestroy window mainQuit
+    widgetShowAll window
+    mainGUI
 \end{code}
