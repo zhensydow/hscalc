@@ -1,0 +1,28 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage[latin1]{inputenc}
+
+\lstnewenvironment{code}
+{
+    \lstset{
+        language=Haskell,
+        basicstyle=\small,
+        frame=single
+    }
+}
+{}
+
+\title{hsCalc - Haskell Stack Calculator}
+\author{Luis Cabellos}
+\date{}
+
+\begin{document}
+
+\maketitle{}
+
+\section{Código Fuente}
+\subsection{main.lhs}
+\input{src/main.lhs}
+
+\end{document}
