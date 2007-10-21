@@ -28,6 +28,24 @@ import Graphics.UI.Gtk.Glade
 \end{code}
 
 \begin{code}
+import Data.IORef
+\end{code}
+
+\begin{code}
+pulsaNumero v e n = do
+    val <- readIORef v
+    let newVal = val * 10 + n
+    writeIORef v newVal
+    set e [entryText := (show newVal)]
+\end{code}
+
+\begin{code}
+setNumButton dialog v e n = do
+    boton <-xmlGetWidget dialog castToButton $ "b_num_" ++ (show n)
+    onClicked boton $ pulsaNumero v e n
+\end{code}
+
+\begin{code}
 main = do
     initGUI
     
@@ -37,6 +55,15 @@ main = do
     let dialogXml = case dialogXmlM of
             (Just dialogXml) -> dialogXml
             Nothing -> error "can't find glade file"
+    
+    -- crea el valor por defecto
+    value <- newIORef 0
+
+    -- obten el campo donde se muestra el numero
+    entry <- xmlGetWidget dialogXml castToEntry "e_num_0"
+
+    -- configura los botones
+    mapM (\n -> setNumButton dialogXml value entry n) [0..9]
     
     -- pon en pantalla la ventana
     window <- xmlGetWidget dialogXml castToWindow "window1"
