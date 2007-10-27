@@ -32,17 +32,25 @@ import Data.IORef
 \end{code}
 
 \begin{code}
-pulsaNumero v e n = do
+pulsaNumero v entries n = do
     val <- readIORef v
     let newVal = val * 10 + n
     writeIORef v newVal
-    set e [entryText := (show newVal)]
+    putStackInEntries entries [newVal]
 \end{code}
 
 \begin{code}
-setNumButton dialog v e n = do
+setNumButton dialog v entries n = do
     boton <-xmlGetWidget dialog castToButton $ "b_num_" ++ (show n)
-    onClicked boton $ pulsaNumero v e n
+    onClicked boton $ pulsaNumero v entries n
+\end{code}
+
+\begin{code}
+putStackInEntries [] _ = return ()
+putStackInEntries (x:xs) [] = return ()
+putStackInEntries (x:xs) (y:ys) = do
+    set x [entryText := (show y)]
+    putStackInEntries xs ys
 \end{code}
 
 \begin{code}
@@ -62,9 +70,14 @@ main = do
     -- obten el campo donde se muestra el numero
     entry <- xmlGetWidget dialogXml castToEntry "e_num_0"
 
-    -- configura los botones
-    mapM (\n -> setNumButton dialogXml value entry n) [0..9]
-    
+    -- crea la lista de entradas donde mostrar la pila
+    entries <- mapM 
+        (\a-> xmlGetWidget dialogXml castToEntry a) 
+        ["e_num_"++(show x)|x<-[0..10]]
+
+    -- configura los botones numericos
+    mapM (\n -> setNumButton dialogXml value entries n) [0..9]
+
     -- pon en pantalla la ventana
     window <- xmlGetWidget dialogXml castToWindow "window1"
     onDestroy window mainQuit
