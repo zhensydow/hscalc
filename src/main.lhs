@@ -32,11 +32,15 @@ import Data.IORef
 \end{code}
 
 \begin{code}
+import StackCalc( insertaDigito )
+\end{code}
+
+\begin{code}
 pulsaNumero v entries n = do
     val <- readIORef v
-    let newVal = val * 10 + n
+    let newVal = insertaDigito val n
     writeIORef v newVal
-    putStackInEntries entries [newVal]
+    putStackInEntries entries newVal
 \end{code}
 
 \begin{code}
@@ -65,7 +69,7 @@ main = do
             Nothing -> error "can't find glade file"
     
     -- crea el valor por defecto
-    value <- newIORef 0
+    value <- newIORef [0]
 
     -- obten el campo donde se muestra el numero
     entry <- xmlGetWidget dialogXml castToEntry "e_num_0"
@@ -74,6 +78,9 @@ main = do
     entries <- mapM 
         (\a-> xmlGetWidget dialogXml castToEntry a) 
         ["e_num_"++(show x)|x<-[0..10]]
+
+    -- poner valores por defecto
+    putStackInEntries entries [0]
 
     -- configura los botones numericos
     mapM (\n -> setNumButton dialogXml value entries n) [0..9]
