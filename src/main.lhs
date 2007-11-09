@@ -32,7 +32,7 @@ import Data.IORef
 \end{code}
 
 \begin{code}
-import StackCalc( insertaDigito )
+import StackCalc( insertaDigito, pilaVacia )
 \end{code}
 
 \begin{code}
@@ -44,14 +44,30 @@ pulsaNumero v entries n = do
 \end{code}
 
 \begin{code}
+pulsaStackAdd v entries = do
+    val <- readIORef v
+    let newVal = 0:val
+    writeIORef v newVal
+    putStackInEntries entries newVal
+\end{code}
+
+\begin{code}
+pulsaStackClear v entries = do
+    writeIORef v pilaVacia
+    putStackInEntries entries pilaVacia
+\end{code}
+
+\begin{code}
 setNumButton dialog v entries n = do
-    boton <-xmlGetWidget dialog castToButton $ "b_num_" ++ (show n)
+    boton <- xmlGetWidget dialog castToButton $ "b_num_" ++ (show n)
     onClicked boton $ pulsaNumero v entries n
 \end{code}
 
 \begin{code}
 putStackInEntries [] _ = return ()
-putStackInEntries (x:xs) [] = return ()
+putStackInEntries (x:xs) [] = do
+    set x [entryText := ""]
+    putStackInEntries xs []
 putStackInEntries (x:xs) (y:ys) = do
     set x [entryText := (show y)]
     putStackInEntries xs ys
@@ -69,7 +85,7 @@ main = do
             Nothing -> error "can't find glade file"
     
     -- crea el valor por defecto
-    value <- newIORef [0]
+    value <- newIORef pilaVacia
 
     -- obten el campo donde se muestra el numero
     entry <- xmlGetWidget dialogXml castToEntry "e_num_0"
@@ -80,10 +96,16 @@ main = do
         ["e_num_"++(show x)|x<-[0..10]]
 
     -- poner valores por defecto
-    putStackInEntries entries [0]
+    putStackInEntries entries pilaVacia
 
     -- configura los botones numericos
     mapM (\n -> setNumButton dialogXml value entries n) [0..9]
+
+    boton <- xmlGetWidget dialogXml castToButton "b_stack_add"
+    onClicked boton $ pulsaStackAdd value entries
+    
+    boton <- xmlGetWidget dialogXml castToButton "b_stack_clear"
+    onClicked boton $ pulsaStackClear value entries
 
     -- pon en pantalla la ventana
     window <- xmlGetWidget dialogXml castToWindow "window1"

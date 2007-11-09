@@ -15,7 +15,11 @@
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 \begin{code}
-module StackCalc( insertaDigito ) where
+module StackCalc( insertaDigito, pilaVacia ) where
+\end{code}
+
+\begin{code}
+pilaVacia = [0]
 \end{code}
 
 \begin{code}
