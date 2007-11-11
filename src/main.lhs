@@ -32,45 +32,15 @@ import Data.IORef
 \end{code}
 
 \begin{code}
-import StackCalc( insertaDigito, pilaVacia )
-\end{code}
-
-\begin{code}
-pulsaNumero v entries n = do
-    val <- readIORef v
-    let newVal = insertaDigito val n
-    writeIORef v newVal
-    putStackInEntries entries newVal
-\end{code}
-
-\begin{code}
-pulsaStackAdd v entries = do
-    val <- readIORef v
-    let newVal = 0:val
-    writeIORef v newVal
-    putStackInEntries entries newVal
-\end{code}
-
-\begin{code}
-pulsaStackClear v entries = do
-    writeIORef v pilaVacia
-    putStackInEntries entries pilaVacia
+import Controller( pulsaNumero, pulsaStackAdd, pulsaStackClear )
+import Vista( putStackInEntries )
+import StackCalc( pilaVacia )
 \end{code}
 
 \begin{code}
 setNumButton dialog v entries n = do
     boton <- xmlGetWidget dialog castToButton $ "b_num_" ++ (show n)
     onClicked boton $ pulsaNumero v entries n
-\end{code}
-
-\begin{code}
-putStackInEntries [] _ = return ()
-putStackInEntries (x:xs) [] = do
-    set x [entryText := ""]
-    putStackInEntries xs []
-putStackInEntries (x:xs) (y:ys) = do
-    set x [entryText := (show y)]
-    putStackInEntries xs ys
 \end{code}
 
 \begin{code}
