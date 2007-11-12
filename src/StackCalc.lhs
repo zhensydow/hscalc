@@ -15,14 +15,25 @@
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 \begin{code}
-module StackCalc( insertaDigito, pilaVacia ) where
+module StackCalc( 
+                 insertaDigito, 
+                 pilaVacia,
+                 aplicaFuncion
+                ) where
 \end{code}
 
 \begin{code}
+pilaVacia :: (Fractional n) => [n]
 pilaVacia = [0]
 \end{code}
 
 \begin{code}
 insertaDigito [] n = [n]
 insertaDigito (x:xs) n = (x * 10 + n) : xs
+\end{code}
+
+\begin{code}
+aplicaFuncion [] _ = []
+aplicaFuncion xs@(x:[]) _ = xs
+aplicaFuncion (x:y:xs) f = f y x : xs
 \end{code}

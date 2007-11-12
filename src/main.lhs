@@ -32,15 +32,43 @@ import Data.IORef
 \end{code}
 
 \begin{code}
-import Controller( pulsaNumero, pulsaStackAdd, pulsaStackClear )
+import Controller( 
+                  pulsaNumero, 
+                  pulsaStackAdd, 
+                  pulsaStackClear,
+                  pulsaOpBinaria )
 import Vista( putStackInEntries )
 import StackCalc( pilaVacia )
 \end{code}
 
 \begin{code}
 setNumButton dialog v entries n = do
-    boton <- xmlGetWidget dialog castToButton $ "b_num_" ++ (show n)
+    boton <- xmlGetWidget dialog castToButton $ name
     onClicked boton $ pulsaNumero v entries n
+        where name = "b_num_" ++ (show.toInteger.round) n
+\end{code}
+
+\begin{code}
+setupButtons dialog value entries = do
+    mapM (\n -> setNumButton dialog value entries n) [0..9]
+
+    boton <- xmlGetWidget dialog castToButton "b_stack_add"
+    onClicked boton $ pulsaStackAdd value entries
+    
+    boton <- xmlGetWidget dialog castToButton "b_stack_clear"
+    onClicked boton $ pulsaStackClear value entries
+    
+    boton <- xmlGetWidget dialog castToButton "b_op_suma"
+    onClicked boton $ pulsaOpBinaria value entries (+)
+
+    boton <- xmlGetWidget dialog castToButton "b_op_mul"
+    onClicked boton $ pulsaOpBinaria value entries (*)
+              
+    boton <- xmlGetWidget dialog castToButton "b_op_resta"
+    onClicked boton $ pulsaOpBinaria value entries (-)
+
+    boton <- xmlGetWidget dialog castToButton "b_op_div"
+    onClicked boton $ pulsaOpBinaria value entries (/)
 \end{code}
 
 \begin{code}
@@ -57,25 +85,16 @@ main = do
     -- crea el valor por defecto
     value <- newIORef pilaVacia
 
-    -- obten el campo donde se muestra el numero
-    entry <- xmlGetWidget dialogXml castToEntry "e_num_0"
-
     -- crea la lista de entradas donde mostrar la pila
     entries <- mapM 
         (\a-> xmlGetWidget dialogXml castToEntry a) 
         ["e_num_"++(show x)|x<-[0..10]]
 
+    -- configura los botones
+    setupButtons dialogXml value entries
+
     -- poner valores por defecto
     putStackInEntries entries pilaVacia
-
-    -- configura los botones numericos
-    mapM (\n -> setNumButton dialogXml value entries n) [0..9]
-
-    boton <- xmlGetWidget dialogXml castToButton "b_stack_add"
-    onClicked boton $ pulsaStackAdd value entries
-    
-    boton <- xmlGetWidget dialogXml castToButton "b_stack_clear"
-    onClicked boton $ pulsaStackClear value entries
 
     -- pon en pantalla la ventana
     window <- xmlGetWidget dialogXml castToWindow "window1"
