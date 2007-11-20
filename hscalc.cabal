@@ -1,0 +1,19 @@
+Name:       	hsCalc
+Version:    	0.3.0
+Cabal-version: 	>=1.1
+License:    	GPL
+License-File: 	gpl-3.0.txt
+Author:     	Luis Cabellos
+Homepage:  	http://hscalc.googlecode.com
+Synopsis:   	Stack Calculator writen in Haskell 
+Build-Depends: 	base -any, gtk >0.9, glade >0.9
+Data-files: 	data/window.glade
+Extra-source-files: 
+		src/Vista.lhs 
+		src/Controller.lhs 
+		src/StackCalc.lhs
+
+Executable: 	hscalc
+Main-is:    	main.lhs
+Hs-Source-Dirs: src
+Ghc-options:	-O3
