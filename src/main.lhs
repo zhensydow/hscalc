@@ -32,11 +32,10 @@ import Data.IORef
 \end{code}
 
 \begin{code}
-import Controller( 
-                  pulsaNumero, 
-                  pulsaStackAdd, 
-                  pulsaStackClear,
-                  pulsaOpBinaria )
+import Controller( pulsaNumero, 
+                   pulsaStackAdd, 
+                   pulsaStackClear,
+                   pulsaOpBinaria )
 import Vista( putStackInEntries )
 import StackCalc( pilaVacia )
 \end{code}
@@ -45,11 +44,22 @@ import StackCalc( pilaVacia )
 setNumButton dialog v entries n = do
     boton <- xmlGetWidget dialog castToButton $ name
     onClicked boton $ pulsaNumero v entries n
-        where name = "b_num_" ++ (show.toInteger.round) n
+        where name = "b_num_" ++ (show n)
 \end{code}
 
 \begin{code}
-setupButtons dialog value entries = do
+setupButtons dialog = do
+    -- crea el valor por defecto
+    value <- newIORef pilaVacia
+
+    -- crea la lista de entradas donde mostrar la pila
+    entries <- mapM 
+        (\a-> xmlGetWidget dialog castToEntry a) 
+        ["e_num_"++(show x)|x<-[0..10]]
+
+    -- poner valores por defecto
+    putStackInEntries entries pilaVacia
+
     mapM (\n -> setNumButton dialog value entries n) [0..9]
 
     boton <- xmlGetWidget dialog castToButton "b_stack_add"
@@ -82,19 +92,8 @@ main = do
             (Just dialogXml) -> dialogXml
             Nothing -> error "can't find glade file"
     
-    -- crea el valor por defecto
-    value <- newIORef pilaVacia
-
-    -- crea la lista de entradas donde mostrar la pila
-    entries <- mapM 
-        (\a-> xmlGetWidget dialogXml castToEntry a) 
-        ["e_num_"++(show x)|x<-[0..10]]
-
     -- configura los botones
-    setupButtons dialogXml value entries
-
-    -- poner valores por defecto
-    putStackInEntries entries pilaVacia
+    setupButtons dialogXml
 
     -- pon en pantalla la ventana
     window <- xmlGetWidget dialogXml castToWindow "window1"

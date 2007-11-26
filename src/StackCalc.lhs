@@ -15,25 +15,61 @@
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 \begin{code}
-module StackCalc( 
-                 insertaDigito, 
-                 pilaVacia,
-                 aplicaFuncion
+module StackCalc( StackValue,
+                  insertaDigito,
+                  nullValue,
+                  pilaVacia,
+                  convertValues,
+                  aplicaFuncion,
+                  stringToVal
                 ) where
 \end{code}
 
 \begin{code}
-pilaVacia :: (Fractional n) => [n]
-pilaVacia = [0]
+data StackValue = N Double |
+                  T String
 \end{code}
 
 \begin{code}
-insertaDigito [] n = [n]
-insertaDigito (x:xs) n = (x * 10 + n) : xs
+instance Show StackValue where
+    show (N v) = show v
+    show (T v) = v
+\end{code}
+
+\begin{code}
+stringToVal s = T s
+\end{code}
+
+\begin{code}
+nullValue  = T "0"
+\end{code}
+
+\begin{code}
+pilaVacia = [nullValue]
+\end{code}
+
+\begin{code}
+extractDouble (N v) = v
+extractDouble (T v) = read v
+\end{code}
+
+\begin{code}
+convertValues xs = map toDouble xs
+    where toDouble (N v) = N v
+          toDouble (T v) = N (read v)
+\end{code}
+
+\begin{code}
+insertaDigito ((T "0"):xs) n = T (show n) : xs
+insertaDigito ((T s):xs) n = T (s ++ show n) : xs
+insertaDigito ((N 0.0):xs) n = T (show n) : xs
+insertaDigito (x:xs) n = T (show n) : x : xs
 \end{code}
 
 \begin{code}
 aplicaFuncion [] _ = []
 aplicaFuncion xs@(x:[]) _ = xs
-aplicaFuncion (x:y:xs) f = f y x : xs
+aplicaFuncion (x:y:xs) f = N (f vy vx) : xs
+    where vx = extractDouble x
+          vy = extractDouble y
 \end{code}

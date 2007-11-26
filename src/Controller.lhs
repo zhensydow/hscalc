@@ -15,11 +15,10 @@
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 \begin{code}
-module Controller( 
-                  pulsaNumero, 
-                  pulsaStackAdd, 
-                  pulsaStackClear,
-                  pulsaOpBinaria
+module Controller( pulsaNumero, 
+                   pulsaStackAdd, 
+                   pulsaStackClear,
+                   pulsaOpBinaria
                  ) where
 \end{code}
 
@@ -28,10 +27,11 @@ import Data.IORef
 \end{code}
 
 \begin{code}
-import StackCalc( 
-                 insertaDigito, 
-                 pilaVacia,
-                 aplicaFuncion )
+import StackCalc( insertaDigito,
+                  pilaVacia,
+                  nullValue,
+                  convertValues,
+                  aplicaFuncion )
 import Vista( putStackInEntries )
 \end{code}
 
@@ -46,7 +46,7 @@ pulsaNumero v entries n = do
 \begin{code}
 pulsaStackAdd v entries = do
     val <- readIORef v
-    let newVal = 0:val
+    let newVal = nullValue:convertValues val
     writeIORef v newVal
     putStackInEntries entries newVal
 \end{code}
