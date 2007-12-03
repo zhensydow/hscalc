@@ -16,13 +16,18 @@
 
 \begin{code}
 module StackCalc( StackValue,
-                  insertaDigito,
+                  stringToVal,
                   nullValue,
                   pilaVacia,
+                  insertaDigito,
+                  insertaComa,
                   convertValues,
-                  aplicaFuncion,
-                  stringToVal
+                  aplicaFuncion
                 ) where
+\end{code}
+
+\begin{code}
+import Data.List( find )
 \end{code}
 
 \begin{code}
@@ -50,13 +55,13 @@ pilaVacia = [nullValue]
 
 \begin{code}
 extractDouble (N v) = v
-extractDouble (T v) = read v
+extractDouble (T s)
+    | (last s) == '.' = read (s++"0")
+    | otherwise = read s
 \end{code}
 
 \begin{code}
-convertValues xs = map toDouble xs
-    where toDouble (N v) = N v
-          toDouble (T v) = N (read v)
+convertValues xs = map (\a-> N $ extractDouble a) xs
 \end{code}
 
 \begin{code}
@@ -64,6 +69,14 @@ insertaDigito ((T "0"):xs) n = T (show n) : xs
 insertaDigito ((T s):xs) n = T (s ++ show n) : xs
 insertaDigito ((N 0.0):xs) n = T (show n) : xs
 insertaDigito (x:xs) n = T (show n) : x : xs
+\end{code}
+
+\begin{code}
+insertaComa xss@((T s):xs)
+    | noComa = T (s ++ ".") : xs
+    | otherwise = xss
+    where noComa = Nothing == (find (=='.') s)
+insertaComa xs = xs
 \end{code}
 
 \begin{code}

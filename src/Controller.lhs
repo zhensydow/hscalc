@@ -16,6 +16,7 @@
 
 \begin{code}
 module Controller( pulsaNumero, 
+                   pulsaComa,
                    pulsaStackAdd, 
                    pulsaStackClear,
                    pulsaOpBinaria
@@ -28,6 +29,7 @@ import Data.IORef
 
 \begin{code}
 import StackCalc( insertaDigito,
+                  insertaComa,
                   pilaVacia,
                   nullValue,
                   convertValues,
@@ -39,6 +41,14 @@ import Vista( putStackInEntries )
 pulsaNumero v entries n = do
     val <- readIORef v
     let newVal = insertaDigito val n
+    writeIORef v newVal
+    putStackInEntries entries newVal
+\end{code}
+
+\begin{code}
+pulsaComa v entries = do
+    val <- readIORef v
+    let newVal = insertaComa val
     writeIORef v newVal
     putStackInEntries entries newVal
 \end{code}

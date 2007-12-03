@@ -33,11 +33,13 @@ import Data.IORef
 
 \begin{code}
 import Controller( pulsaNumero, 
+                   pulsaComa,
                    pulsaStackAdd, 
                    pulsaStackClear,
                    pulsaOpBinaria )
 import Vista( putStackInEntries )
-import StackCalc( pilaVacia )
+import StackCalc( pilaVacia,
+                  insertaComa )
 \end{code}
 
 \begin{code}
@@ -79,6 +81,9 @@ setupButtons dialog = do
 
     boton <- xmlGetWidget dialog castToButton "b_op_div"
     onClicked boton $ pulsaOpBinaria value entries (/)
+
+    boton <- xmlGetWidget dialog castToButton "b_coma"
+    onClicked boton $ pulsaComa value entries
 \end{code}
 
 \begin{code}
