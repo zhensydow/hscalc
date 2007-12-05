@@ -81,7 +81,11 @@ insertaComa xs = xs
 \end{code}
 
 \begin{code}
-insertaSigno xss@((T s):xs) = xss
+insertaSigno ((T s):xs)
+    | tieneSigno = (T $ tail s) : xs
+    | otherwise = T ("-" ++ s) : xs
+    where tieneSigno = '-' == (head s)
+insertaSigno ((N v):xs) = (N $ -v) : xs
 \end{code}
 
 \begin{code}
