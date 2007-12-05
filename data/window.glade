@@ -50,8 +50,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_Add" modifiers="0" signal="activate"/>
-		  <accelerator key="plus" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_Add" modifiers="0" signal="clicked"/>
+		  <accelerator key="plus" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">3</property>
@@ -73,9 +73,9 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_Decimal" modifiers="0" signal="activate"/>
-		  <accelerator key="comma" modifiers="0" signal="activate"/>
-		  <accelerator key="period" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_Decimal" modifiers="0" signal="clicked"/>
+		  <accelerator key="comma" modifiers="0" signal="clicked"/>
+		  <accelerator key="period" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">2</property>
@@ -118,8 +118,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_3" modifiers="0" signal="activate"/>
-		  <accelerator key="3" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_3" modifiers="0" signal="clicked"/>
+		  <accelerator key="3" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">2</property>
@@ -141,8 +141,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_Multiply" modifiers="0" signal="activate"/>
-		  <accelerator key="asterisk" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_Multiply" modifiers="0" signal="clicked"/>
+		  <accelerator key="asterisk" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">3</property>
@@ -164,8 +164,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_2" modifiers="0" signal="activate"/>
-		  <accelerator key="2" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_2" modifiers="0" signal="clicked"/>
+		  <accelerator key="2" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">1</property>
@@ -187,8 +187,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_Subtract" modifiers="0" signal="activate"/>
-		  <accelerator key="minus" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_Subtract" modifiers="0" signal="clicked"/>
+		  <accelerator key="minus" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">3</property>
@@ -210,8 +210,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_6" modifiers="0" signal="activate"/>
-		  <accelerator key="6" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_6" modifiers="0" signal="clicked"/>
+		  <accelerator key="6" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">2</property>
@@ -233,8 +233,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_0" modifiers="0" signal="activate"/>
-		  <accelerator key="0" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_0" modifiers="0" signal="clicked"/>
+		  <accelerator key="0" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">0</property>
@@ -256,8 +256,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_1" modifiers="0" signal="activate"/>
-		  <accelerator key="1" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_1" modifiers="0" signal="clicked"/>
+		  <accelerator key="1" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">0</property>
@@ -279,8 +279,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_Divide" modifiers="0" signal="activate"/>
-		  <accelerator key="slash" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_Divide" modifiers="0" signal="clicked"/>
+		  <accelerator key="slash" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">3</property>
@@ -302,8 +302,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_9" modifiers="0" signal="activate"/>
-		  <accelerator key="9" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_9" modifiers="0" signal="clicked"/>
+		  <accelerator key="9" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">2</property>
@@ -325,8 +325,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_8" modifiers="0" signal="activate"/>
-		  <accelerator key="8" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_8" modifiers="0" signal="clicked"/>
+		  <accelerator key="8" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">1</property>
@@ -348,8 +348,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_5" modifiers="0" signal="activate"/>
-		  <accelerator key="5" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_5" modifiers="0" signal="clicked"/>
+		  <accelerator key="5" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">1</property>
@@ -371,8 +371,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_7" modifiers="0" signal="activate"/>
-		  <accelerator key="7" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_7" modifiers="0" signal="clicked"/>
+		  <accelerator key="7" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">0</property>
@@ -394,8 +394,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_4" modifiers="0" signal="activate"/>
-		  <accelerator key="4" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_4" modifiers="0" signal="clicked"/>
+		  <accelerator key="4" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">0</property>
@@ -415,8 +415,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_Enter" modifiers="0" signal="activate"/>
-		  <accelerator key="Return" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_Enter" modifiers="0" signal="clicked"/>
+		  <accelerator key="Return" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">0</property>
@@ -453,8 +453,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_Divide" modifiers="0" signal="activate"/>
-		  <accelerator key="slash" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_Divide" modifiers="0" signal="clicked"/>
+		  <accelerator key="slash" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">4</property>
@@ -476,8 +476,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_Multiply" modifiers="0" signal="activate"/>
-		  <accelerator key="asterisk" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_Multiply" modifiers="0" signal="clicked"/>
+		  <accelerator key="asterisk" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">4</property>
@@ -499,8 +499,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_Subtract" modifiers="0" signal="activate"/>
-		  <accelerator key="minus" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_Subtract" modifiers="0" signal="clicked"/>
+		  <accelerator key="minus" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">4</property>
@@ -522,8 +522,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_Add" modifiers="0" signal="activate"/>
-		  <accelerator key="plus" modifiers="0" signal="activate"/>
+		  <accelerator key="KP_Add" modifiers="0" signal="clicked"/>
+		  <accelerator key="plus" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">4</property>

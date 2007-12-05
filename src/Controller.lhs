@@ -53,41 +53,33 @@ pulsaFuncion funcion v entries = do
 \end{code}
 
 \begin{code}
-pulsaComa:: (EntryClass) t =>
+pulsaComa :: (EntryClass) t =>
             IORef [StackValue] -> [t] -> IO()
 pulsaComa = pulsaFuncion insertaComa
 \end{code}
 
 \begin{code}
-pulsaSigno:: (EntryClass) t =>
+pulsaSigno :: (EntryClass) t =>
             IORef [StackValue] -> [t] -> IO()
 pulsaSigno = pulsaFuncion insertaSigno
 \end{code}
 
 \begin{code}
-pulsaStackAdd:: (EntryClass) t =>
+pulsaStackAdd :: (EntryClass) t =>
             IORef [StackValue] -> [t] -> IO()
 pulsaStackAdd = pulsaFuncion (\v-> nullValue:convertValues v)
 \end{code}
 
 \begin{code}
-pulsaStackClear:: (EntryClass) t =>
+pulsaStackClear :: (EntryClass) t =>
             IORef [StackValue] -> [t] -> IO()
 pulsaStackClear = pulsaFuncion (\_-> pilaVacia)
 \end{code}
 
 \begin{code}
-pulsaNumero v entries n = do
-    val <- readIORef v
-    let newVal = insertaDigito val n
-    writeIORef v newVal
-    putStackInEntries entries newVal
+pulsaNumero n = pulsaFuncion (\v-> insertaDigito v n)
 \end{code}
 
 \begin{code}
-pulsaOpBinaria v entries f = do
-    val <- readIORef v
-    let newVal = aplicaFuncion val f
-    writeIORef v newVal
-    putStackInEntries entries newVal
+pulsaOpBinaria f = pulsaFuncion (\v-> aplicaFuncion v f)
 \end{code}

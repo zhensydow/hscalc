@@ -46,7 +46,7 @@ import StackCalc( pilaVacia,
 \begin{code}
 setNumButton dialog v entries n = do
     boton <- xmlGetWidget dialog castToButton $ name
-    onClicked boton $ pulsaNumero v entries n
+    onClicked boton $ pulsaNumero n v entries
         where name = "b_num_" ++ (show n)
 \end{code}
 
@@ -96,7 +96,7 @@ setupButtons dialog = do
 
     -- configurar botones con operacion binaria
     mapM (\(n,f) -> 
-              setButton dialog n $ pulsaOpBinaria value entries f )
+              setButton dialog n $ pulsaOpBinaria f value entries )
          operaciones
 \end{code}
 
