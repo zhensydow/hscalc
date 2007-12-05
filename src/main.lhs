@@ -34,6 +34,7 @@ import Data.IORef
 \begin{code}
 import Controller( pulsaNumero, 
                    pulsaComa,
+                   pulsaSigno,
                    pulsaStackAdd, 
                    pulsaStackClear,
                    pulsaOpBinaria )
@@ -47,6 +48,30 @@ setNumButton dialog v entries n = do
     boton <- xmlGetWidget dialog castToButton $ name
     onClicked boton $ pulsaNumero v entries n
         where name = "b_num_" ++ (show n)
+\end{code}
+
+\begin{code}
+setButton dialog name funcion = do
+    boton <- xmlGetWidget dialog castToButton name
+    onClicked boton funcion
+\end{code}
+
+\begin{code}
+funciones = [
+             ("b_stack_add",pulsaStackAdd),
+             ("b_stack_clear", pulsaStackClear),
+             ("b_coma", pulsaComa),
+             ("b_signo", pulsaSigno)
+            ]
+\end{code}
+
+\begin{code}
+operaciones = [
+               ("b_op_suma", (+)),
+               ("b_op_mul", (*)),
+               ("b_op_resta", (-)),
+               ("b_op_div", (/))
+              ]
 \end{code}
 
 \begin{code}
@@ -64,26 +89,15 @@ setupButtons dialog = do
 
     mapM (\n -> setNumButton dialog value entries n) [0..9]
 
-    boton <- xmlGetWidget dialog castToButton "b_stack_add"
-    onClicked boton $ pulsaStackAdd value entries
-    
-    boton <- xmlGetWidget dialog castToButton "b_stack_clear"
-    onClicked boton $ pulsaStackClear value entries
-    
-    boton <- xmlGetWidget dialog castToButton "b_op_suma"
-    onClicked boton $ pulsaOpBinaria value entries (+)
+    -- configurar botones funcion simple
+    mapM (\(n,f) -> 
+              setButton dialog n $ f value entries )
+         funciones
 
-    boton <- xmlGetWidget dialog castToButton "b_op_mul"
-    onClicked boton $ pulsaOpBinaria value entries (*)
-              
-    boton <- xmlGetWidget dialog castToButton "b_op_resta"
-    onClicked boton $ pulsaOpBinaria value entries (-)
-
-    boton <- xmlGetWidget dialog castToButton "b_op_div"
-    onClicked boton $ pulsaOpBinaria value entries (/)
-
-    boton <- xmlGetWidget dialog castToButton "b_coma"
-    onClicked boton $ pulsaComa value entries
+    -- configurar botones con operacion binaria
+    mapM (\(n,f) -> 
+              setButton dialog n $ pulsaOpBinaria value entries f )
+         operaciones
 \end{code}
 
 \begin{code}
@@ -94,7 +108,7 @@ main = do
     name <- getDataFileName "data/window.glade"
     dialogXmlM <- xmlNew name
     let dialogXml = case dialogXmlM of
-            (Just dialogXml) -> dialogXml
+            (Just d) -> d
             Nothing -> error "can't find glade file"
     
     -- configura los botones

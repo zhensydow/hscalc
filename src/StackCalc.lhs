@@ -21,6 +21,7 @@ module StackCalc( StackValue,
                   pilaVacia,
                   insertaDigito,
                   insertaComa,
+                  insertaSigno,
                   convertValues,
                   aplicaFuncion
                 ) where
@@ -77,6 +78,10 @@ insertaComa xss@((T s):xs)
     | otherwise = xss
     where noComa = Nothing == (find (=='.') s)
 insertaComa xs = xs
+\end{code}
+
+\begin{code}
+insertaSigno xss@((T s):xs) = xss
 \end{code}
 
 \begin{code}

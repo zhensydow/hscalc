@@ -17,6 +17,7 @@
 \begin{code}
 module Controller( pulsaNumero, 
                    pulsaComa,
+                   pulsaSigno,
                    pulsaStackAdd, 
                    pulsaStackClear,
                    pulsaOpBinaria
@@ -28,8 +29,14 @@ import Data.IORef
 \end{code}
 
 \begin{code}
-import StackCalc( insertaDigito,
+import Graphics.UI.Gtk
+\end{code}
+
+\begin{code}
+import StackCalc( StackValue,
+                  insertaDigito,
                   insertaComa,
+                  insertaSigno,
                   pilaVacia,
                   nullValue,
                   convertValues,
@@ -38,33 +45,43 @@ import Vista( putStackInEntries )
 \end{code}
 
 \begin{code}
+pulsaFuncion funcion v entries = do
+   val <- readIORef v
+   let newVal = funcion val
+   writeIORef v newVal
+   putStackInEntries entries newVal
+\end{code}
+
+\begin{code}
+pulsaComa:: (EntryClass) t =>
+            IORef [StackValue] -> [t] -> IO()
+pulsaComa = pulsaFuncion insertaComa
+\end{code}
+
+\begin{code}
+pulsaSigno:: (EntryClass) t =>
+            IORef [StackValue] -> [t] -> IO()
+pulsaSigno = pulsaFuncion insertaSigno
+\end{code}
+
+\begin{code}
+pulsaStackAdd:: (EntryClass) t =>
+            IORef [StackValue] -> [t] -> IO()
+pulsaStackAdd = pulsaFuncion (\v-> nullValue:convertValues v)
+\end{code}
+
+\begin{code}
+pulsaStackClear:: (EntryClass) t =>
+            IORef [StackValue] -> [t] -> IO()
+pulsaStackClear = pulsaFuncion (\_-> pilaVacia)
+\end{code}
+
+\begin{code}
 pulsaNumero v entries n = do
     val <- readIORef v
     let newVal = insertaDigito val n
     writeIORef v newVal
     putStackInEntries entries newVal
-\end{code}
-
-\begin{code}
-pulsaComa v entries = do
-    val <- readIORef v
-    let newVal = insertaComa val
-    writeIORef v newVal
-    putStackInEntries entries newVal
-\end{code}
-
-\begin{code}
-pulsaStackAdd v entries = do
-    val <- readIORef v
-    let newVal = nullValue:convertValues val
-    writeIORef v newVal
-    putStackInEntries entries newVal
-\end{code}
-
-\begin{code}
-pulsaStackClear v entries = do
-    writeIORef v pilaVacia
-    putStackInEntries entries pilaVacia
 \end{code}
 
 \begin{code}

@@ -16,4 +16,4 @@ Extra-source-files:
 Executable: 	hscalc
 Main-is:    	main.lhs
 Hs-Source-Dirs: src
-Ghc-options:	-O3
+Ghc-options:	-O3 -Wall
