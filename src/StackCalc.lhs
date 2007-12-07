@@ -16,6 +16,8 @@
 
 \begin{code}
 module StackCalc( StackValue,
+                  StackState,
+                  BinaryOp,
                   stringToVal,
                   nullValue,
                   pilaVacia,
@@ -37,24 +39,33 @@ data StackValue = N Double |
 \end{code}
 
 \begin{code}
+type BinaryOp = Double -> Double -> Double
+type StackState = [StackValue]
+\end{code}
+
+\begin{code}
 instance Show StackValue where
     show (N v) = show v
     show (T v) = v
 \end{code}
 
 \begin{code}
+stringToVal :: String -> StackValue
 stringToVal s = T s
 \end{code}
 
 \begin{code}
+nullValue :: StackValue
 nullValue  = T "0"
 \end{code}
 
 \begin{code}
+pilaVacia :: StackState
 pilaVacia = [nullValue]
 \end{code}
 
 \begin{code}
+extractDouble :: StackValue -> Double
 extractDouble (N v) = v
 extractDouble (T s)
     | (last s) == '.' = read (s++"0")
@@ -62,10 +73,13 @@ extractDouble (T s)
 \end{code}
 
 \begin{code}
+convertValues :: StackState -> StackState
 convertValues xs = map (\a-> N $ extractDouble a) xs
 \end{code}
 
 \begin{code}
+insertaDigito :: StackState -> Integer -> StackState
+insertaDigito [] n =  [T (show n)]
 insertaDigito ((T "0"):xs) n = T (show n) : xs
 insertaDigito ((T s):xs) n = T (s ++ show n) : xs
 insertaDigito ((N 0.0):xs) n = T (show n) : xs
@@ -73,6 +87,7 @@ insertaDigito (x:xs) n = T (show n) : x : xs
 \end{code}
 
 \begin{code}
+insertaComa :: StackState -> StackState
 insertaComa xss@((T s):xs)
     | noComa = T (s ++ ".") : xs
     | otherwise = xss
@@ -81,16 +96,19 @@ insertaComa xs = xs
 \end{code}
 
 \begin{code}
+insertaSigno :: StackState -> StackState
 insertaSigno ((T s):xs)
     | tieneSigno = (T $ tail s) : xs
     | otherwise = T ("-" ++ s) : xs
     where tieneSigno = '-' == (head s)
 insertaSigno ((N v):xs) = (N $ -v) : xs
+insertaSigno xs = xs
 \end{code}
 
 \begin{code}
+aplicaFuncion :: StackState -> BinaryOp -> StackState
 aplicaFuncion [] _ = []
-aplicaFuncion xs@(x:[]) _ = xs
+aplicaFuncion (x:[]) _ = x:[]
 aplicaFuncion (x:y:xs) f = N (f vy vx) : xs
     where vx = extractDouble x
           vy = extractDouble y

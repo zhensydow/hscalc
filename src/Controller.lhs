@@ -15,7 +15,8 @@
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 \begin{code}
-module Controller( pulsaNumero, 
+module Controller( FuncionCalculadora,
+                   pulsaNumero, 
                    pulsaComa,
                    pulsaSigno,
                    pulsaStackAdd, 
@@ -33,7 +34,8 @@ import Graphics.UI.Gtk
 \end{code}
 
 \begin{code}
-import StackCalc( StackValue,
+import StackCalc( StackState,
+                  BinaryOp,
                   insertaDigito,
                   insertaComa,
                   insertaSigno,
@@ -45,6 +47,14 @@ import Vista( putStackInEntries )
 \end{code}
 
 \begin{code}
+type FuncionCalculadora = 
+    IORef StackState -> [Entry] -> IO()
+\end{code}
+
+\begin{code}
+pulsaFuncion :: 
+    (StackState -> StackState) 
+    -> IORef StackState -> [Entry] -> IO()
 pulsaFuncion funcion v entries = do
    val <- readIORef v
    let newVal = funcion val
@@ -53,33 +63,32 @@ pulsaFuncion funcion v entries = do
 \end{code}
 
 \begin{code}
-pulsaComa :: (EntryClass) t =>
-            IORef [StackValue] -> [t] -> IO()
+pulsaComa :: FuncionCalculadora
 pulsaComa = pulsaFuncion insertaComa
 \end{code}
 
 \begin{code}
-pulsaSigno :: (EntryClass) t =>
-            IORef [StackValue] -> [t] -> IO()
+pulsaSigno :: FuncionCalculadora
 pulsaSigno = pulsaFuncion insertaSigno
 \end{code}
 
 \begin{code}
-pulsaStackAdd :: (EntryClass) t =>
-            IORef [StackValue] -> [t] -> IO()
-pulsaStackAdd = pulsaFuncion (\v-> nullValue:convertValues v)
+pulsaStackAdd :: FuncionCalculadora
+pulsaStackAdd = pulsaFuncion 
+                (\v-> nullValue:convertValues v)
 \end{code}
 
 \begin{code}
-pulsaStackClear :: (EntryClass) t =>
-            IORef [StackValue] -> [t] -> IO()
+pulsaStackClear :: FuncionCalculadora
 pulsaStackClear = pulsaFuncion (\_-> pilaVacia)
 \end{code}
 
 \begin{code}
+pulsaNumero :: Integer -> FuncionCalculadora
 pulsaNumero n = pulsaFuncion (\v-> insertaDigito v n)
 \end{code}
 
 \begin{code}
+pulsaOpBinaria :: BinaryOp -> FuncionCalculadora
 pulsaOpBinaria f = pulsaFuncion (\v-> aplicaFuncion v f)
 \end{code}

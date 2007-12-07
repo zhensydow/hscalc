@@ -23,6 +23,11 @@ import Graphics.UI.Gtk
 \end{code}
 
 \begin{code}
+import StackCalc( StackState )
+\end{code}
+
+\begin{code}
+putStackInEntries :: [Entry] -> StackState -> IO()
 putStackInEntries [] _ = return ()
 putStackInEntries (x:xs) [] = do
     set x [entryText := ""]

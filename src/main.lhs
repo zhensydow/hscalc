@@ -32,31 +32,40 @@ import Data.IORef
 \end{code}
 
 \begin{code}
-import Controller( pulsaNumero, 
+import Controller( FuncionCalculadora,
+                   pulsaNumero, 
                    pulsaComa,
                    pulsaSigno,
                    pulsaStackAdd, 
                    pulsaStackClear,
                    pulsaOpBinaria )
 import Vista( putStackInEntries )
-import StackCalc( pilaVacia,
-                  insertaComa )
+import StackCalc( StackState,
+                  BinaryOp,
+                  pilaVacia )
 \end{code}
 
 \begin{code}
+setNumButton :: 
+    GladeXML -> IORef StackState 
+    -> [Entry] -> Integer -> IO()
 setNumButton dialog v entries n = do
     boton <- xmlGetWidget dialog castToButton $ name
     onClicked boton $ pulsaNumero n v entries
+    return ()
         where name = "b_num_" ++ (show n)
 \end{code}
 
 \begin{code}
+setButton :: GladeXML -> String -> IO() -> IO()
 setButton dialog name funcion = do
     boton <- xmlGetWidget dialog castToButton name
     onClicked boton funcion
+    return ()
 \end{code}
 
 \begin{code}
+funciones :: [( String, FuncionCalculadora )]
 funciones = [
              ("b_stack_add",pulsaStackAdd),
              ("b_stack_clear", pulsaStackClear),
@@ -66,6 +75,7 @@ funciones = [
 \end{code}
 
 \begin{code}
+operaciones :: [( String, BinaryOp )]
 operaciones = [
                ("b_op_suma", (+)),
                ("b_op_mul", (*)),
@@ -75,14 +85,19 @@ operaciones = [
 \end{code}
 
 \begin{code}
+getNumEntry :: GladeXML -> Integer -> IO Entry
+getNumEntry dialog n = xmlGetWidget dialog castToEntry name
+    where name = "e_num_" ++ (show n)
+\end{code}
+
+\begin{code}
+setupButtons :: GladeXML -> IO()
 setupButtons dialog = do
     -- crea el valor por defecto
     value <- newIORef pilaVacia
 
     -- crea la lista de entradas donde mostrar la pila
-    entries <- mapM 
-        (\a-> xmlGetWidget dialog castToEntry a) 
-        ["e_num_"++(show x)|x<-[0..10]]
+    entries <- mapM (getNumEntry dialog) [0..10]
 
     -- poner valores por defecto
     putStackInEntries entries pilaVacia
@@ -96,11 +111,14 @@ setupButtons dialog = do
 
     -- configurar botones con operacion binaria
     mapM (\(n,f) -> 
-              setButton dialog n $ pulsaOpBinaria f value entries )
+              setButton dialog n $ 
+              pulsaOpBinaria f value entries )
          operaciones
+    return ()
 \end{code}
 
 \begin{code}
+main :: IO()
 main = do
     initGUI
     
