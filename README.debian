@@ -1,0 +1,19 @@
+
+1) Generar el codigo fuente
+
+runhaskell Setup.hs sdist
+
+2) Preparar para generar los paquetes debian
+
+cd ..
+tar -xzvf hscalc-<ver>.tar.gz
+cp hscalc-<ver>.tar.gz hscalc_<ver>.orig.tar.gz
+cp -r hscalc/debian hscalc-<ver>/
+
+2) Generar paquete codigo
+
+dpkg-buildpackage -S -rfakeroot
+
+3) Generar paquete binario
+
+sudo pbuilder build ../*.dsc

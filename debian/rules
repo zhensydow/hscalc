@@ -1,0 +1,32 @@
+#!/usr/bin/make -f
+
+package = hscalc
+docdir = debian/tmp/usr/share/doc/$(package)
+
+build:
+	runhaskell Setup.hs configure --prefix=/usr
+	runhaskell Setup.hs build
+	touch build
+
+clean:
+	rm -f build
+	runhaskell Setup.hs clean
+#	rm -rf *~ debian/tmp debian/*~ debian/files* debian/substvars
+
+binary-indep: build
+
+binary-arch: build
+	rm -rf debian/tmp
+	runhaskell Setup.hs copy --destdir=debian/tmp
+	dpkg-shlibdeps debian/tmp/usr/bin/hscalc
+	mkdir debian/tmp/DEBIAN
+	touch debian/tmp/DEBIAN/control.new
+	touch debian/tmp/DEBIAN/control
+	dpkg-gencontrol -isp
+	chown -R root:root debian/tmp
+	chmod -R u+w,go=rX debian/tmp
+	dpkg --build debian/tmp ..
+
+binary: binary-indep binary-arch
+
+.PHONY: binary binary-arch binary-indep clean
