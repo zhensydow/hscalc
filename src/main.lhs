@@ -19,7 +19,7 @@ module Main where
 \end{code}
 
 \begin{code}
-import Paths_hsCalc
+import Paths_hscalc
 \end{code}
 
 \begin{code}
