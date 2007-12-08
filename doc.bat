@@ -1,1 +1,0 @@
-latex doc.tex
