@@ -133,7 +133,7 @@ main = do
     setupButtons dialogXml
 
     -- pon en pantalla la ventana
-    window <- xmlGetWidget dialogXml castToWindow "window1"
+    window <- xmlGetWidget dialogXml castToWindow "main"
     onDestroy window mainQuit
     widgetShowAll window
     mainGUI

@@ -3,7 +3,7 @@
 
 <glade-interface>
 
-<widget class="GtkWindow" id="window1">
+<widget class="GtkWindow" id="main">
   <property name="title" translatable="yes">Haskell Stack Calc</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -34,7 +34,7 @@
 	  <child>
 	    <widget class="GtkTable" id="table1">
 	      <property name="visible">True</property>
-	      <property name="n_rows">5</property>
+	      <property name="n_rows">6</property>
 	      <property name="n_columns">5</property>
 	      <property name="homogeneous">False</property>
 	      <property name="row_spacing">0</property>
@@ -408,42 +408,6 @@
 	      </child>
 
 	      <child>
-		<widget class="GtkButton" id="b_stack_add">
-		  <property name="border_width">4</property>
-		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">push</property>
-		  <property name="use_underline">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">False</property>
-		  <accelerator key="KP_Enter" modifiers="0" signal="clicked"/>
-		  <accelerator key="Return" modifiers="0" signal="clicked"/>
-		</widget>
-		<packing>
-		  <property name="left_attach">0</property>
-		  <property name="right_attach">2</property>
-		  <property name="top_attach">4</property>
-		  <property name="bottom_attach">5</property>
-		</packing>
-	      </child>
-
-	      <child>
-		<widget class="GtkButton" id="b_stack_clear">
-		  <property name="border_width">4</property>
-		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">clear</property>
-		  <property name="use_underline">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">False</property>
-		</widget>
-		<packing>
-		  <property name="left_attach">2</property>
-		  <property name="right_attach">4</property>
-		  <property name="top_attach">4</property>
-		  <property name="bottom_attach">5</property>
-		</packing>
-	      </child>
-
-	      <child>
 		<widget class="GtkButton" id="b_opf_div">
 		  <property name="border_width">4</property>
 		  <property name="width_request">40</property>
@@ -534,6 +498,103 @@
 		  <property name="y_options"></property>
 		</packing>
 	      </child>
+
+	      <child>
+		<widget class="GtkButton" id="b_stack_add">
+		  <property name="border_width">4</property>
+		  <property name="visible">True</property>
+		  <property name="label" translatable="yes">push</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">False</property>
+		  <accelerator key="KP_Enter" modifiers="0" signal="clicked"/>
+		  <accelerator key="Return" modifiers="0" signal="clicked"/>
+		</widget>
+		<packing>
+		  <property name="left_attach">0</property>
+		  <property name="right_attach">2</property>
+		  <property name="top_attach">5</property>
+		  <property name="bottom_attach">6</property>
+		  <property name="x_options">fill</property>
+		  <property name="y_options"></property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkButton" id="b_stack_dup">
+		  <property name="border_width">4</property>
+		  <property name="visible">True</property>
+		  <property name="label" translatable="yes">dup</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">False</property>
+		</widget>
+		<packing>
+		  <property name="left_attach">4</property>
+		  <property name="right_attach">5</property>
+		  <property name="top_attach">5</property>
+		  <property name="bottom_attach">6</property>
+		  <property name="x_options">fill</property>
+		  <property name="y_options"></property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkButton" id="b_stack_clear">
+		  <property name="border_width">4</property>
+		  <property name="visible">True</property>
+		  <property name="label" translatable="yes">clear</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">False</property>
+		</widget>
+		<packing>
+		  <property name="left_attach">2</property>
+		  <property name="right_attach">4</property>
+		  <property name="top_attach">4</property>
+		  <property name="bottom_attach">5</property>
+		  <property name="x_options">fill</property>
+		  <property name="y_options"></property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkButton" id="b_stack_pop">
+		  <property name="border_width">4</property>
+		  <property name="visible">True</property>
+		  <property name="label" translatable="yes">pop</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">False</property>
+		</widget>
+		<packing>
+		  <property name="left_attach">2</property>
+		  <property name="right_attach">4</property>
+		  <property name="top_attach">5</property>
+		  <property name="bottom_attach">6</property>
+		  <property name="x_options">fill</property>
+		  <property name="y_options"></property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkButton" id="b_del">
+		  <property name="border_width">4</property>
+		  <property name="visible">True</property>
+		  <property name="label" translatable="yes">&lt;-</property>
+		  <property name="use_underline">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">False</property>
+		</widget>
+		<packing>
+		  <property name="left_attach">0</property>
+		  <property name="right_attach">2</property>
+		  <property name="top_attach">4</property>
+		  <property name="bottom_attach">5</property>
+		  <property name="x_options">fill</property>
+		  <property name="y_options"></property>
+		</packing>
+	      </child>
 	    </widget>
 	    <packing>
 	      <property name="padding">0</property>
@@ -558,7 +619,7 @@
 		  <property name="has_frame">False</property>
 		  <property name="invisible_char">●</property>
 		  <property name="activates_default">False</property>
- 		  <property name="xalign">1</property>
+                  <property name="xalign">1</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -577,7 +638,7 @@
 		  <property name="has_frame">False</property>
 		  <property name="invisible_char">●</property>
 		  <property name="activates_default">False</property>
- 		  <property name="xalign">1</property>
+                  <property name="xalign">1</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -596,7 +657,7 @@
 		  <property name="has_frame">False</property>
 		  <property name="invisible_char">●</property>
 		  <property name="activates_default">False</property>
- 		  <property name="xalign">1</property>
+                  <property name="xalign">1</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -615,7 +676,7 @@
 		  <property name="has_frame">False</property>
 		  <property name="invisible_char">●</property>
 		  <property name="activates_default">False</property>
- 		  <property name="xalign">1</property>
+                  <property name="xalign">1</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -634,7 +695,7 @@
 		  <property name="has_frame">False</property>
 		  <property name="invisible_char">●</property>
 		  <property name="activates_default">False</property>
- 		  <property name="xalign">1</property>
+                  <property name="xalign">1</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -653,7 +714,7 @@
 		  <property name="has_frame">False</property>
 		  <property name="invisible_char">●</property>
 		  <property name="activates_default">False</property>
- 		  <property name="xalign">1</property>
+                  <property name="xalign">1</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -672,7 +733,7 @@
 		  <property name="has_frame">False</property>
 		  <property name="invisible_char">●</property>
 		  <property name="activates_default">False</property>
- 		  <property name="xalign">1</property>
+                  <property name="xalign">1</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -691,7 +752,7 @@
 		  <property name="has_frame">False</property>
 		  <property name="invisible_char">●</property>
 		  <property name="activates_default">False</property>
- 		  <property name="xalign">1</property>
+                  <property name="xalign">1</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -710,7 +771,7 @@
 		  <property name="has_frame">False</property>
 		  <property name="invisible_char">●</property>
 		  <property name="activates_default">False</property>
- 		  <property name="xalign">1</property>
+                  <property name="xalign">1</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -729,7 +790,7 @@
 		  <property name="has_frame">False</property>
 		  <property name="invisible_char">●</property>
 		  <property name="activates_default">False</property>
- 		  <property name="xalign">1</property>
+		  <property name="xalign">1</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
