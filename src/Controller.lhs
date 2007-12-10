@@ -19,7 +19,10 @@ module Controller( FuncionCalculadora,
                    pulsaNumero, 
                    pulsaComa,
                    pulsaSigno,
+                   pulsaDelete,
                    pulsaStackAdd, 
+                   pulsaStackPop,
+                   pulsaStackDup,
                    pulsaStackClear,
                    pulsaOpBinaria
                  ) where
@@ -39,8 +42,11 @@ import StackCalc( StackState,
                   insertaDigito,
                   insertaComa,
                   insertaSigno,
+                  borraCaracter,
                   pilaVacia,
                   nullValue,
+                  eliminaValue,
+                  duplicaValue,
                   convertValues,
                   aplicaFuncion )
 import Vista( putStackInEntries )
@@ -73,9 +79,24 @@ pulsaSigno = pulsaFuncion insertaSigno
 \end{code}
 
 \begin{code}
+pulsaDelete :: FuncionCalculadora
+pulsaDelete = pulsaFuncion borraCaracter
+\end{code}
+
+\begin{code}
 pulsaStackAdd :: FuncionCalculadora
 pulsaStackAdd = pulsaFuncion 
                 (\v-> nullValue:convertValues v)
+\end{code}
+
+\begin{code}
+pulsaStackPop :: FuncionCalculadora
+pulsaStackPop = pulsaFuncion eliminaValue
+\end{code}
+
+\begin{code}
+pulsaStackDup :: FuncionCalculadora
+pulsaStackDup = pulsaFuncion duplicaValue
 \end{code}
 
 \begin{code}

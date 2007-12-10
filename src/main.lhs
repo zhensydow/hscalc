@@ -36,7 +36,10 @@ import Controller( FuncionCalculadora,
                    pulsaNumero, 
                    pulsaComa,
                    pulsaSigno,
+                   pulsaDelete,
                    pulsaStackAdd, 
+                   pulsaStackPop,
+                   pulsaStackDup,
                    pulsaStackClear,
                    pulsaOpBinaria )
 import Vista( putStackInEntries )
@@ -68,9 +71,12 @@ setButton dialog name funcion = do
 funciones :: [( String, FuncionCalculadora )]
 funciones = [
              ("b_stack_add",pulsaStackAdd),
+             ("b_stack_pop",pulsaStackPop),
+             ("b_stack_dup",pulsaStackDup),
              ("b_stack_clear", pulsaStackClear),
              ("b_coma", pulsaComa),
-             ("b_signo", pulsaSigno)
+             ("b_signo", pulsaSigno),
+             ("b_del", pulsaDelete)
             ]
 \end{code}
 

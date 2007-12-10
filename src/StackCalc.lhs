@@ -21,9 +21,12 @@ module StackCalc( StackValue,
                   stringToVal,
                   nullValue,
                   pilaVacia,
+                  eliminaValue,
+                  duplicaValue,
                   insertaDigito,
                   insertaComa,
                   insertaSigno,
+                  borraCaracter,
                   convertValues,
                   aplicaFuncion
                 ) where
@@ -65,6 +68,19 @@ pilaVacia = [nullValue]
 \end{code}
 
 \begin{code}
+eliminaValue :: StackState -> StackState
+eliminaValue [] = pilaVacia
+eliminaValue (xs:[]) = pilaVacia
+eliminaValue xs = tail xs
+\end{code}
+
+\begin{code}
+duplicaValue :: StackState -> StackState
+duplicaValue [] = pilaVacia
+duplicaValue xss@(x:xs) = convertValues $ x : xss
+\end{code}
+
+\begin{code}
 extractDouble :: StackValue -> Double
 extractDouble (N v) = v
 extractDouble (T s)
@@ -81,6 +97,7 @@ convertValues xs = map (\a-> N $ extractDouble a) xs
 insertaDigito :: StackState -> Integer -> StackState
 insertaDigito [] n =  [T (show n)]
 insertaDigito ((T "0"):xs) n = T (show n) : xs
+insertaDigito ((T "-0"):xs) n = T ("-"++(show n)) : xs
 insertaDigito ((T s):xs) n = T (s ++ show n) : xs
 insertaDigito ((N 0.0):xs) n = T (show n) : xs
 insertaDigito (x:xs) n = T (show n) : x : xs
@@ -103,6 +120,18 @@ insertaSigno ((T s):xs)
     where tieneSigno = '-' == (head s)
 insertaSigno ((N v):xs) = (N $ -v) : xs
 insertaSigno xs = xs
+\end{code}
+
+\begin{code}
+borraCaracter :: StackState -> StackState
+borraCaracter [] = pilaVacia
+borraCaracter ((T s):xs)
+    | len > 2 = (T $ init s) : xs
+    | sinSigno && len > 1 = (T $ init s) : xs
+    | otherwise = nullValue : xs
+    where sinSigno = not $ '-' == (head s)
+          len = length s
+borraCaracter ((N v):xs) = nullValue : xs
 \end{code}
 
 \begin{code}
