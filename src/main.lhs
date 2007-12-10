@@ -41,7 +41,8 @@ import Controller( FuncionCalculadora,
                    pulsaStackPop,
                    pulsaStackDup,
                    pulsaStackClear,
-                   pulsaOpBinaria )
+                   pulsaOpBinaria,
+                   pulsaOpFold )
 import Vista( putStackInEntries )
 import StackCalc( StackState,
                   BinaryOp,
@@ -91,6 +92,16 @@ operaciones = [
 \end{code}
 
 \begin{code}
+operacionesFold :: [(String, BinaryOp)]
+operacionesFold = [
+                   ("b_opf_suma", (+)),
+                   ("b_opf_mul", (*)),
+                   ("b_opf_resta", (-)),
+                   ("b_opf_div", (/))
+                  ]
+\end{code}
+
+\begin{code}
 getNumEntry :: GladeXML -> Integer -> IO Entry
 getNumEntry dialog n = xmlGetWidget dialog castToEntry name
     where name = "e_num_" ++ (show n)
@@ -120,6 +131,12 @@ setupButtons dialog = do
               setButton dialog n $ 
               pulsaOpBinaria f value entries )
          operaciones
+
+    -- configurar botones con operacion fold
+    mapM (\(n,f) ->
+              setButton dialog n $
+              pulsaOpFold f value entries )
+         operacionesFold
     return ()
 \end{code}
 

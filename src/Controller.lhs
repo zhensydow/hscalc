@@ -24,7 +24,8 @@ module Controller( FuncionCalculadora,
                    pulsaStackPop,
                    pulsaStackDup,
                    pulsaStackClear,
-                   pulsaOpBinaria
+                   pulsaOpBinaria,
+                   pulsaOpFold
                  ) where
 \end{code}
 
@@ -48,7 +49,8 @@ import StackCalc( StackState,
                   eliminaValue,
                   duplicaValue,
                   convertValues,
-                  aplicaFuncion )
+                  aplicaFuncion,
+                  aplicaFold )
 import Vista( putStackInEntries )
 \end{code}
 
@@ -112,4 +114,9 @@ pulsaNumero n = pulsaFuncion (\v-> insertaDigito v n)
 \begin{code}
 pulsaOpBinaria :: BinaryOp -> FuncionCalculadora
 pulsaOpBinaria f = pulsaFuncion (\v-> aplicaFuncion v f)
+\end{code}
+
+\begin{code}
+pulsaOpFold :: BinaryOp -> FuncionCalculadora
+pulsaOpFold f = pulsaFuncion (\v-> aplicaFold v f)
 \end{code}

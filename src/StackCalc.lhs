@@ -28,7 +28,8 @@ module StackCalc( StackValue,
                   insertaSigno,
                   borraCaracter,
                   convertValues,
-                  aplicaFuncion
+                  aplicaFuncion,
+                  aplicaFold
                 ) where
 \end{code}
 
@@ -141,4 +142,13 @@ aplicaFuncion (x:[]) _ = x:[]
 aplicaFuncion (x:y:xs) f = N (f vy vx) : xs
     where vx = extractDouble x
           vy = extractDouble y
+\end{code}
+
+\begin{code}
+aplicaFold :: StackState -> BinaryOp -> StackState
+aplicaFold [] _ = []
+aplicaFold xs f = [foldr1 ff $ convertValues xs]
+    where ff x y = N $ f vy vx
+              where vx = extractDouble x
+                    vy = extractDouble y
 \end{code}
