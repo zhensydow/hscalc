@@ -70,14 +70,14 @@ pilaVacia = [nullValue]
 \begin{code}
 eliminaValue :: StackState -> StackState
 eliminaValue [] = pilaVacia
-eliminaValue (xs:[]) = pilaVacia
+eliminaValue (_:[]) = pilaVacia
 eliminaValue xs = tail xs
 \end{code}
 
 \begin{code}
 duplicaValue :: StackState -> StackState
 duplicaValue [] = pilaVacia
-duplicaValue xss@(x:xs) = convertValues $ x : xss
+duplicaValue xss@(x:_) = convertValues $ x : xss
 \end{code}
 
 \begin{code}
@@ -131,7 +131,7 @@ borraCaracter ((T s):xs)
     | otherwise = nullValue : xs
     where sinSigno = not $ '-' == (head s)
           len = length s
-borraCaracter ((N v):xs) = nullValue : xs
+borraCaracter ((N _):xs) = nullValue : xs
 \end{code}
 
 \begin{code}

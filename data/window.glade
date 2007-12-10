@@ -528,6 +528,8 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
+		  <accelerator key="KP_Enter" modifiers="GDK_CONTROL_MASK" signal="clicked"/>
+		  <accelerator key="Return" modifiers="GDK_CONTROL_MASK" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">4</property>
@@ -566,6 +568,7 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
+		  <accelerator key="BackSpace" modifiers="GDK_CONTROL_MASK" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">2</property>
@@ -585,6 +588,7 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">False</property>
+		  <accelerator key="BackSpace" modifiers="0" signal="clicked"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">0</property>
