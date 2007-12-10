@@ -1,3 +1,9 @@
+hscalc (0.3.3-1) gutsy; urgency=low
+
+  * Simple Operations on all the stack (++) (**) (--) (//)
+	
+ -- Luis Jose Cabellos Gomez <zhen.sydow@gmail.com>  Mon, 10 Dec 2007 14:10:14 +0100
+
 hscalc (0.3.2-1) gutsy; urgency=low
 
   * Duplicate, pop, push and clear buttons
