@@ -115,10 +115,12 @@ insertaComa xs = xs
 
 \begin{code}
 insertaSigno :: StackState -> StackState
+insertaSigno ((T "0"):xs) = (T "0") : xs
 insertaSigno ((T s):xs)
     | tieneSigno = (T $ tail s) : xs
     | otherwise = T ("-" ++ s) : xs
     where tieneSigno = '-' == (head s)
+insertaSigno ((N 0.0):xs) = (N 0.0) : xs
 insertaSigno ((N v):xs) = (N $ -v) : xs
 insertaSigno xs = xs
 \end{code}

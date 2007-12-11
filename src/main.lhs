@@ -81,8 +81,8 @@ muestraAbout parent = do
     aboutDialog <- xmlGetWidget aboutXml castToAboutDialog "about"
 
     -- Fija el nombre
-    name <- windowGetTitle parent
-    aboutDialogSetName aboutDialog name
+    title <- windowGetTitle parent
+    aboutDialogSetName aboutDialog title
 
     -- make the about dialog appear above the main window
     windowSetTransientFor aboutDialog parent
