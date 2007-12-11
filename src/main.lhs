@@ -69,6 +69,31 @@ setButton dialog name funcion = do
 \end{code}
 
 \begin{code}
+muestraAbout :: Window -> IO()
+muestraAbout parent = do
+    -- carga la especificacion
+    name <- getDataFileName "data/about.glade"
+    aboutXmlM <- xmlNew name
+    let aboutXml = case aboutXmlM of
+            (Just d) -> d
+            Nothing -> error "can't find glade file"
+
+    aboutDialog <- xmlGetWidget aboutXml castToAboutDialog "about"
+
+    -- Fija el nombre
+    name <- windowGetTitle parent
+    aboutDialogSetName aboutDialog name
+
+    -- make the about dialog appear above the main window
+    windowSetTransientFor aboutDialog parent
+
+    -- make the dialog non-modal
+    afterResponse aboutDialog $ \_ -> widgetDestroy aboutDialog
+    widgetShow aboutDialog
+    return ()
+\end{code}
+
+\begin{code}
 funciones :: [( String, FuncionCalculadora )]
 funciones = [
              ("b_stack_add",pulsaStackAdd),
@@ -137,6 +162,11 @@ setupButtons dialog = do
               setButton dialog n $
               pulsaOpFold f value entries )
          operacionesFold
+
+    window <- xmlGetWidget dialog castToWindow "main"
+
+    setButton dialog "b_about" $ muestraAbout window
+
     return ()
 \end{code}
 

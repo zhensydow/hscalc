@@ -7,7 +7,9 @@ Author:     	Luis Cabellos
 Homepage:  	http://hscalc.googlecode.com
 Synopsis:   	Stack Calculator writen in Haskell 
 Build-Depends: 	base -any, gtk >0.9, glade >0.9
-Data-files: 	data/window.glade
+Data-files: 	
+		data/window.glade
+		data/about.glade
 Extra-source-files: 
 		src/Vista.lhs 
 		src/Controller.lhs 
