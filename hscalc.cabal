@@ -1,12 +1,15 @@
-Name:       	hscalc
-Version:    	0.4.0
-Cabal-version: 	>=1.1
-License:    	GPL
-License-File: 	gpl-3.0.txt
-Author:     	Luis Cabellos
-Homepage:  	http://hscalc.googlecode.com
-Synopsis:   	Stack Calculator writen in Haskell 
-Build-Depends: 	base -any, gtk >0.9, glade >0.9
+Name:		     hscalc
+Version:    	     0.4.0
+Synopsis:   	     Stack Calculator writen in Haskell 
+Description:         Stack Calculator writen in Haskell
+License:             GPL-3
+License-file:        LICENSE
+Author:     	     Luis Cabellos
+Maintainer:          zhen.sydow@gmail.com
+Copyright:           Luis Cabellos 2011
+Category:            Mathematics
+Build-type:          Simple
+Cabal-version:       >=1.8
 Data-files: 	
 		data/window.glade
 		data/about.glade
@@ -15,7 +18,13 @@ Extra-source-files:
 		src/Controller.lhs 
 		src/StackCalc.lhs
 
-Executable: 	hscalc
-Main-is:    	main.lhs
-Hs-Source-Dirs: src
-Ghc-options:	-O3 -Wall
+Executable hscalc
+  Hs-Source-Dirs:    src
+  Main-is:    	     main.lhs
+  Build-Depends:     base -any, gtk >0.9, glade >0.9
+  Ghc-options:	     -O3 -Wall
+
+source-repository head
+  type: git
+  location: https://zhensydow@github.com/zhensydow/hscalc.git
+  branch: develop
