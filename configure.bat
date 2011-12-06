@@ -1,1 +1,0 @@
-runhaskell setup.hs configure --ghc --with-runghc=c:\programas\ghc --bindir=$prefix\hscalc --datadir=$prefix\hscalc --datasubdir=
